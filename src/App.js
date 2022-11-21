@@ -1,23 +1,21 @@
 import Input from './Component/Input';
 import ListForm from './Component/ListForm';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 function App() {
 
-  const [input, setInput] = useState([]);
-  // const [isChecked, setIsChecked] = useState(false);
+  const [inputValue, setInputValue] = useState([]);
 
-
-  // useEffect(() => {
-  //   if(input.length !== 0) {
-  //     localStorage.setItem('todo', JSON.stringify(input));
-  //   }  
-  // }, [input])
+  useEffect(() => {
+    if(inputValue.length !== 0) {
+      localStorage.setItem('todos', JSON.stringify(inputValue));
+    }  
+  }, [inputValue])
   
-  // useEffect(() => {
-  //     setInput(JSON.parse(localStorage.getItem('todo') || '[]'));
-  // }, []);
+  useEffect(() => {
+      setInputValue(JSON.parse(localStorage.getItem('todos') || '[]'));
+  }, []);
 
 
   return (
@@ -26,12 +24,11 @@ function App() {
         <h1 className="text-3xl py-2 text-white ml-5 ">To do List</h1>
       </header>
       <Input
-        setInput={setInput}
+        setInputValue={setInputValue}
       />
       <ListForm
-        // setIsChecked={setIsChecked}
-        input={input}
-        setInput={setInput}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
       />
     </div>
   );
